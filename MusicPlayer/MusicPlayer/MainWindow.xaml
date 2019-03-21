@@ -1,0 +1,68 @@
+﻿<Window x:Name="mainWindow" x:Class="MusicPlayer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MusicPlayer"
+        mc:Ignorable="d"
+        Title="Music Player" Height="520" Width="800" Loaded="mainWindow_Loaded" Background="Transparent" WindowStyle="None" AllowsTransparency="True">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="1" CornerRadius="0" ResizeBorderThickness="4" GlassFrameThickness="0">
+
+        </WindowChrome>
+    </WindowChrome.WindowChrome>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Rectangle Grid.RowSpan="3" Fill="#BE1E2D" />
+
+        <Frame x:Name="frame" Grid.RowSpan="2" NavigationUIVisibility="Hidden" Margin="1,1,1,0"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Rectangle x:Name="DragBar" MouseDown="DragBar_MouseDown" Grid.ColumnSpan="2" Fill="Transparent"/>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Foreground="#FFD0D0D0" FontSize="10" VerticalAlignment="Center" Margin="10,0,0,0" Padding="0" FontWeight="Light"/>
+                <Label Content="Import" Foreground="#FFD0D0D0" FontSize="10" VerticalAlignment="Center" Margin="10,0,0,0" Padding="0" FontWeight="Light"/>
+                <Label Content="About" Foreground="#FFD0D0D0" FontSize="10" VerticalAlignment="Center" Margin="10,4,0,4" Padding="0" FontWeight="Light"/>
+
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="exit" Click="Exit_Click" Height="15" Margin="5,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
+                    <Image Source="/icons/exit.png"/>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="3" Background="#BE1E2D">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="skip_back" Click="Skip_back_Click"  Height="20" Margin="5,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
+                    <Image Source="/icons/skip_back.png"/>
+                </Button>
+                <Button x:Name="play" Height="20" Margin="5,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" >
+                    <Image Source="/icons/play.png"/>
+                </Button>
+                <Button x:Name="pause" Height="20" Margin="5,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" >
+                    <Image Source="/icons/pause.png"/>
+                </Button>
+                <Button x:Name="skip_foward" Height="20" Margin="5,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" >
+                    <Image Source="/icons/skip_forward.png"/>
+                </Button>
+                <Button x:Name="loop" Height="20" Margin="25,0,5,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" >
+                    <Image Source="/icons/loop.png"/>
+                </Button>
+                <Button x:Name="shuffle" Height="20" Margin="5,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" >
+                    <Image Source="/icons/shuffle.png"/>
+                </Button>
+
+            </StackPanel>
+
+
+        </Grid>
+    </Grid>
+</Window>

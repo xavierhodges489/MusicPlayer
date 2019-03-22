@@ -74,6 +74,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CommandPattern\Command.cs" />
+    <Compile Include="CommandPattern\CommandInvoker.cs" />
+    <Compile Include="CommandPattern\PauseCommand.cs" />
+    <Compile Include="CommandPattern\PlayCommand.cs" />
+    <Compile Include="CommandPattern\Song.cs" />
     <Compile Include="ListView.xaml.cs">
       <DependentUpon>ListView.xaml</DependentUpon>
     </Compile>

@@ -28,7 +28,7 @@
             <Rectangle x:Name="DragBar" MouseDown="DragBar_MouseDown" Grid.ColumnSpan="2" Fill="Transparent"/>
             <StackPanel Orientation="Horizontal">
                 <Label Content="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Foreground="#FFD0D0D0" FontSize="10" VerticalAlignment="Center" Margin="10,0,0,0" Padding="0" FontWeight="Light"/>
-                <Label Content="Import" Foreground="#FFD0D0D0" FontSize="10" VerticalAlignment="Center" Margin="10,0,0,0" Padding="0" FontWeight="Light"/>
+                <Label Content="Import" MouseDown="Label_MouseDown" Foreground="#FFD0D0D0" FontSize="10" VerticalAlignment="Center" Margin="10,0,0,0" Padding="0" FontWeight="Light"/>
                 <Label Content="About" Foreground="#FFD0D0D0" FontSize="10" VerticalAlignment="Center" Margin="10,4,0,4" Padding="0" FontWeight="Light"/>
 
             </StackPanel>
@@ -44,13 +44,13 @@
                 <Button x:Name="skip_back" Click="Skip_back_Click"  Height="20" Margin="5,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
                     <Image Source="/icons/skip_back.png"/>
                 </Button>
-                <Button x:Name="play" Height="20" Margin="5,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" >
+                <Button x:Name="play" Click="play_Click" Height="20" Margin="5,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" >
                     <Image Source="/icons/play.png"/>
                 </Button>
-                <Button x:Name="pause" Height="20" Margin="5,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" >
+                <Button x:Name="pause" Click="pause_Click" Height="20" Margin="5,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" >
                     <Image Source="/icons/pause.png"/>
                 </Button>
-                <Button x:Name="skip_foward" Height="20" Margin="5,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" >
+                <Button x:Name="skip_foward" Click="skip_foward_Click" Height="20" Margin="5,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" >
                     <Image Source="/icons/skip_forward.png"/>
                 </Button>
                 <Button x:Name="loop" Height="20" Margin="25,0,5,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" >

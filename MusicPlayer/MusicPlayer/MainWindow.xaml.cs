@@ -45,11 +45,6 @@ namespace MusicPlayer
             this.DataContext = this;
         }
 
-        /*private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            this.DragMove();
-        }*/
-
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             App.Current.Shutdown();
@@ -73,18 +68,6 @@ namespace MusicPlayer
             }
         }
 
-        private void Label_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.ShowDialog();
-            Uri uri = new Uri(openFileDialog1.FileName);
-            player.Open(uri);
-            songs.Add(new Song(uri));
-            currentSongPointer++;
-            cmdControl.setCommand(slot, new PlayCommand((Song)songs[currentSongPointer]), new PauseCommand((Song)songs[currentSongPointer]));
-            slot++;
-        }
-
         private void pause_Click(object sender, RoutedEventArgs e)
         {
             cmdControl.pausebtnPushed(currentSongPointer);
@@ -106,6 +89,18 @@ namespace MusicPlayer
                 currentSongPointer++;
                 cmdControl.playbtnPushed(currentSongPointer);
             }
+        }
+
+        private void ImportButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.ShowDialog();
+            Uri uri = new Uri(openFileDialog1.FileName);
+            player.Open(uri);
+            songs.Add(new Song(uri));
+            currentSongPointer++;
+            cmdControl.setCommand(slot, new PlayCommand((Song)songs[currentSongPointer]), new PauseCommand((Song)songs[currentSongPointer]));
+            slot++;
         }
     }
 }

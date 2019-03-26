@@ -28,8 +28,8 @@
             <Rectangle x:Name="DragBar" MouseDown="DragBar_MouseDown" Grid.ColumnSpan="2" Fill="Transparent"/>
             <StackPanel Orientation="Horizontal">
                 <Label Content="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Foreground="#FFD0D0D0" FontSize="10" VerticalAlignment="Center" Margin="10,0,0,0" Padding="0" FontWeight="Light"/>
-                <Label Content="Import" MouseDown="Label_MouseDown" Foreground="#FFD0D0D0" FontSize="10" VerticalAlignment="Center" Margin="10,0,0,0" Padding="0" FontWeight="Light"/>
-                <Label Content="About" Foreground="#FFD0D0D0" FontSize="10" VerticalAlignment="Center" Margin="10,4,0,4" Padding="0" FontWeight="Light"/>
+                <Button Name="ImportButton" Content="Import" Click="ImportButton_Click" Foreground="#FFD0D0D0" FontSize="10" VerticalAlignment="Center" Margin="10,0,0,0" Padding="0" FontWeight="Light" Background="{x:Null}" BorderBrush="{x:Null}"/>
+                <Button Name="AboutButton" Content="About" Foreground="#FFD0D0D0" FontSize="10" VerticalAlignment="Center" Margin="10,0,0,0" Padding="0" FontWeight="Light" Background="{x:Null}" BorderBrush="{x:Null}"/>
 
             </StackPanel>
 

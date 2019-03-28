@@ -50,7 +50,7 @@
                 <Button x:Name="pause" Click="pause_Click" Height="20" Margin="5,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" >
                     <Image Source="/icons/pause.png"/>
                 </Button>
-                <Button x:Name="skip_foward" Click="skip_foward_Click" Height="20" Margin="5,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" >
+                <Button x:Name="skip_forward" Click="skip_forward_Click" Height="20" Margin="5,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" >
                     <Image Source="/icons/skip_forward.png"/>
                 </Button>
                 <Button x:Name="loop" Height="20" Margin="25,0,5,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" >

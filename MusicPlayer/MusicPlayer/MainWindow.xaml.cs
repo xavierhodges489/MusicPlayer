@@ -23,20 +23,15 @@ namespace MusicPlayer
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static MediaPlayer player;
-        ArrayList songs;
-        int currentSongPointer;
-        int slot;
-        CommandInvoker cmdControl;
+        
+
+        Player player;
 
         public MainWindow()
         {
-            InitializeComponent();
-            player = new MediaPlayer();
-            songs = new ArrayList();
-            currentSongPointer = -1;
-            cmdControl = new CommandInvoker();
-            slot = 0;               //slot to be used when setting commands
+            
+
+            player = new Player();
         }
 
         private void mainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -57,50 +52,27 @@ namespace MusicPlayer
 
         private void Skip_back_Click(object sender, RoutedEventArgs e)
         {
-            if (currentSongPointer <= 0)
-            {
-                //do nothing
-            }
-            else
-            {
-                currentSongPointer--;
-                cmdControl.playbtnPushed(currentSongPointer);
-            }
+            player.skipBack();
         }
 
         private void pause_Click(object sender, RoutedEventArgs e)
         {
-            cmdControl.pausebtnPushed(currentSongPointer);
+            player.pause();
         }
 
         private void play_Click(object sender, RoutedEventArgs e)
         {
-            cmdControl.playbtnPushed(currentSongPointer);
+            player.play();
         }
 
-        private void skip_foward_Click(object sender, RoutedEventArgs e)
+        private void skip_forward_Click(object sender, RoutedEventArgs e)
         {
-            if (currentSongPointer >= songs.Count)
-            {
-                //do nothing
-            }
-            else
-            {
-                currentSongPointer++;
-                cmdControl.playbtnPushed(currentSongPointer);
-            }
+            player.skipForward();
         }
 
         private void ImportButton_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.ShowDialog();
-            Uri uri = new Uri(openFileDialog1.FileName);
-            player.Open(uri);
-            songs.Add(new Song(uri));
-            currentSongPointer++;
-            cmdControl.setCommand(slot, new PlayCommand((Song)songs[currentSongPointer]), new PauseCommand((Song)songs[currentSongPointer]));
-            slot++;
+            player.import();
         }
     }
 }

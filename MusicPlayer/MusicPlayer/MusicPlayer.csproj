@@ -74,6 +74,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Singleton\Player.cs" />
     <Compile Include="CommandPattern\Command.cs" />
     <Compile Include="CommandPattern\CommandInvoker.cs" />
     <Compile Include="CommandPattern\PauseCommand.cs" />

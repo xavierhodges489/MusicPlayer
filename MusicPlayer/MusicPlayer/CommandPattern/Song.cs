@@ -17,13 +17,13 @@ namespace MusicPlayer.CommandPattern
 
         public void play()
         {
-            MainWindow.player.Open(this.filePath);
-            MainWindow.player.Play();
+            Player.mplayer.Open(this.filePath);
+            Player.mplayer.Play();
         }
 
         public void pause()
         {
-            MainWindow.player.Pause();
+            Player.mplayer.Pause();
         }
     }
 }

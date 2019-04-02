@@ -12,21 +12,35 @@ namespace MusicPlayer
 {
     
 
-    class Player
+    public sealed class Player
     {
         public static MediaPlayer mplayer;
-        ArrayList songs;
+        ArrayList queue;
         int currentSongPointer;
         int slot;
         CommandInvoker cmdControl;
 
-        public Player()
+        private Player()
         {
             mplayer = new MediaPlayer();
-            songs = new ArrayList();
+            queue = new ArrayList();
             currentSongPointer = -1;
             cmdControl = new CommandInvoker();
             slot = 0;               //slot to be used when setting commands
+        }
+
+        private static Player instance = null;
+
+        public static Player Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new Player();
+                }
+                return instance;
+            }
         }
 
         public void skipBack()
@@ -54,7 +68,7 @@ namespace MusicPlayer
 
         public void skipForward()
         {
-            if (currentSongPointer >= songs.Count)
+            if (currentSongPointer >= queue.Count)
             {
                 //do nothing
             }
@@ -65,15 +79,17 @@ namespace MusicPlayer
             }
         }
 
+
+
         public void import()
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.ShowDialog();
             Uri uri = new Uri(openFileDialog1.FileName);
             mplayer.Open(uri);
-            songs.Add(new Song(uri));
+            queue.Add(new Song(uri));
             currentSongPointer++;
-            cmdControl.setCommand(slot, new PlayCommand((Song)songs[currentSongPointer]), new PauseCommand((Song)songs[currentSongPointer]));
+            cmdControl.setCommand(slot, new PlayCommand((Song)queue[currentSongPointer]), new PauseCommand((Song)queue[currentSongPointer]));
             slot++;
         }
     }

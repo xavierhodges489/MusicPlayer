@@ -31,7 +31,7 @@ namespace MusicPlayer
         {
             
 
-            player = new Player();
+            player = Player.Instance;
         }
 
         private void mainWindow_Loaded(object sender, RoutedEventArgs e)

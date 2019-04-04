@@ -89,6 +89,7 @@ namespace MusicPlayer
 
         public void import()
         {
+            /**
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.ShowDialog();
             Uri uri = new Uri(openFileDialog1.FileName);
@@ -100,6 +101,26 @@ namespace MusicPlayer
             currentSongPointer++;
             cmdControl.setCommand(slot, new PlayCommand((Song)queue[currentSongPointer]), new PauseCommand((Song)queue[currentSongPointer]));
             slot++;
+            */
+
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Multiselect = true;
+            openFileDialog1.ShowDialog();
+
+            //String[] uri = openFileDialog1.FileNames;
+
+            String[] s = openFileDialog1.FileNames;
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                Uri uri = new Uri(s[i], UriKind.Absolute);
+                mplayer.Open(uri);
+                File file = File.Create(uri.OriginalString);
+                queue.Add(new Song(uri, file.Tag.Title, file.Tag.Album, file.Tag.JoinedPerformers, (int)file.Tag.Year));
+                currentSongPointer++;
+                cmdControl.setCommand(slot, new PlayCommand((Song)queue[currentSongPointer]), new PauseCommand((Song)queue[currentSongPointer]));
+                slot++;
+            }
         }
     }
 }

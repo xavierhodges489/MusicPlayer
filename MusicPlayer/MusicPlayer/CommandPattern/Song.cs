@@ -6,13 +6,25 @@ using System.Threading.Tasks;
 
 namespace MusicPlayer.CommandPattern
 {
-    class Song
+    public class Song
     {
-        private Uri filePath;
+        public Uri filePath { get; set; }
 
-        public Song(Uri file)
+        public string title { get; set; }
+
+        public string album { get; set; }
+
+        public string  artist { get; set; }
+
+        public int year { get; set; }
+
+        public Song(Uri file, string title, string album, string artist, int year)
         {
             this.filePath = file;
+            this.title = title;
+            this.album = album;
+            this.artist = artist;
+            this.year = year;
         }
 
         public void play()

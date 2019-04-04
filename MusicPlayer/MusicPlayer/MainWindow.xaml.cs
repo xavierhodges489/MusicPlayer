@@ -23,14 +23,11 @@ namespace MusicPlayer
     /// </summary>
     public partial class MainWindow : Window
     {
-        
 
         Player player;
 
         public MainWindow()
         {
-            
-
             player = Player.Instance;
         }
 

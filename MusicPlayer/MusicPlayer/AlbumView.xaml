@@ -21,9 +21,9 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Image Source="/album_art/NarrowStairs.jpg" Width="600" Height="600" Grid.ColumnSpan="3" Grid.RowSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Image Name="image_blurred" Source="/album_art/unknown.jpg" Grid.ColumnSpan="3" Grid.RowSpan="4" Height="{Binding Height}" Width="{Binding Width}" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Image.Effect>
-                <BlurEffect Radius="15"/>
+                <BlurEffect Radius="20"/>
             </Image.Effect>
         </Image>
         <Grid  Grid.ColumnSpan="3" Grid.RowSpan="4">
@@ -39,13 +39,17 @@
             <Image Source="/icons/toListView.png" Width="20"/>
         </Button>
         <StackPanel Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Left">
-            <Image Source="/album_art/NarrowStairs.jpg" Width="200" Height="200" HorizontalAlignment="Left" Margin="0,5,0,0"/>
-            <TextBox Text="Soul Meets Body" TextWrapping="Wrap" Foreground="White" FontWeight="Bold" FontSize="25" Margin="0,15,0,0" Background="{x:Null}" Width="300" BorderBrush="{x:Null}"/>
-            <TextBlock Foreground="White" FontWeight="Light"  FontSize="13" Margin="0,7,0,0">
-                Death Cab For Cutie
-                <LineBreak/>
-                Narrow Stairs • 2008
-            </TextBlock>
+            <Image Name="image_main"  Source="/album_art/unknown.jpg" Width="200" Height="200" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+            <TextBox Name="tb_title" Text="Song Name" TextWrapping="Wrap" Foreground="White" FontWeight="Bold" FontSize="25" Margin="0,15,0,0" Background="{x:Null}" Width="300" BorderBrush="{x:Null}" HorizontalAlignment="Left"/>
+            <TextBox Name="tb_artist" Text="Artist" Foreground="White" FontWeight="Light"  FontSize="13" Margin="0,1,0,0" Background="Transparent" BorderBrush="Transparent"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBox Name="tb_album" Text="Album" Foreground="White" FontWeight="Light"  FontSize="13" Background="Transparent" BorderBrush="Transparent"/>
+                <TextBox  Text="•" Foreground="White" FontWeight="Light"  FontSize="13" Background="Transparent" BorderBrush="Transparent"/>
+                <TextBox Name="tb_year" Text="Year" Foreground="White" FontWeight="Light"  FontSize="13" Background="Transparent" BorderBrush="Transparent"/>
+            </StackPanel>
+
+
+
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Column="3" Grid.Row="2" Background="#BE1E2D">
             <Label Content="Songs" Foreground="White" FontWeight="Bold" Margin="10,0,0,0" VerticalAlignment="Center"/>

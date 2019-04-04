@@ -14,11 +14,13 @@
             <RowDefinition Height="20"/>
             <RowDefinition Height="30"/>
             <RowDefinition/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="45"/>
             <ColumnDefinition/>
+            <ColumnDefinition Width="45"/>
         </Grid.ColumnDefinitions>
         <Button x:Name="toAlbumView" Click="ToAlbumView_Click" Grid.Row="2" Grid.Column="1" Height="22" Margin="5,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Image Source="/icons/toAlbumView.png" Width="20"/>
@@ -29,6 +31,28 @@
             <Button Content="Songs" Margin="10,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White"/>
             <Button Content="Playlists" Margin="10,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White"/>
         </StackPanel>
+        <Button x:Name="refresh" Click="Refresh_Click" Grid.Row="2" Grid.Column="2" Height="22" Margin="5,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Content="Refresh" FontWeight="Light" FontSize="10"/>
+
+
+        <ListView Name="lvSongs" Grid.Column="2" Grid.Row="3" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Focusable="False">
+            <ListView.Resources>
+                <Style TargetType="{x:Type GridViewColumnHeader}">
+                    <Setter Property="HorizontalContentAlignment" Value="Left" />
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="BorderBrush" Value="Transparent" />
+                    <Setter Property="Foreground" Value="#FFCDCDCD" />
+                    <Setter Property="FontWeight" Value="Light" />
+                </Style>
+            </ListView.Resources>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Title" Width="200" DisplayMemberBinding="{Binding title}"/>
+                    <GridViewColumn Header="Album" Width="200" DisplayMemberBinding="{Binding album}"/>
+                    <GridViewColumn Header="Artist" Width="200" DisplayMemberBinding="{Binding artist}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        
 
     </Grid>
 </Page>

@@ -20,9 +20,18 @@ namespace MusicPlayer
     /// </summary>
     public partial class AlbumView : Page
     {
-        public AlbumView()
+        public AlbumView(String title, String artists, String album, int year)
         {
             InitializeComponent();
+            tb_title.Text = title;
+            tb_album.Text = album;
+            tb_artist.Text = artists;
+            tb_year.Text = year.ToString();
+
+            string filename = String.Format("/album_art/{0}.jpg", album);
+            
+            image_blurred.Source = new BitmapImage(new Uri(@filename, UriKind.Relative));
+            image_main.Source = new BitmapImage(new Uri(@filename, UriKind.Relative));
         }
 
         private void ToListView_Click(object sender, RoutedEventArgs e)

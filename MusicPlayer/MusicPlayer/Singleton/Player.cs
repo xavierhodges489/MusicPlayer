@@ -33,6 +33,7 @@ namespace MusicPlayer
             cmdControl = new CommandInvoker();
             slot = 0;               //slot to be used when setting commands
             subject = new Subject();
+            subject.setState(currentSongPointer);
             new Observer1(subject);
         }
 

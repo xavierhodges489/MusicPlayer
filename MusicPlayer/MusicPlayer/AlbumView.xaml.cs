@@ -34,6 +34,11 @@ namespace MusicPlayer
             image_main.Source = new BitmapImage(new Uri(@filename, UriKind.Relative));
         }
 
+        public AlbumView()
+        {
+            InitializeComponent();
+        }
+
         private void ToListView_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new ListView());

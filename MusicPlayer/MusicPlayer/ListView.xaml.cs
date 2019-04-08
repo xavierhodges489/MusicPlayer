@@ -30,8 +30,13 @@ namespace MusicPlayer
 
         private void ToAlbumView_Click(object sender, RoutedEventArgs e)
         {
-            Song currentSong = player.queue[player.currentSongPointer];
-            this.NavigationService.Navigate(new AlbumView(currentSong.title, currentSong.artist, currentSong.album, currentSong.year));
+            if(player.currentSongPointer < 0) this.NavigationService.Navigate(new AlbumView());
+            else
+            {
+                Song currentSong = player.queue[player.currentSongPointer];
+                this.NavigationService.Navigate(new AlbumView(currentSong.title, currentSong.artist, currentSong.album, currentSong.year));
+            }
+            
         }
 
         private void Refresh_Click(object sender, RoutedEventArgs e)

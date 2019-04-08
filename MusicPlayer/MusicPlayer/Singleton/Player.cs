@@ -58,9 +58,11 @@ namespace MusicPlayer
             }
             else
             {
-                currentSongPointer--;
-                cmdControl.playbtnPushed(currentSongPointer);
-                subject.setState(currentSongPointer);
+                subject.setState(--currentSongPointer);
+                //currentSongPointer--;
+                //cmdControl.playbtnPushed(currentSongPointer);
+                cmdControl.playbtnPushed(subject.getState());
+                
             }
         }
 
@@ -68,8 +70,9 @@ namespace MusicPlayer
         {
             if(currentSongPointer > -1 && currentSongPointer <= queue.Count)
             {
-                cmdControl.pausebtnPushed(currentSongPointer);
+                //cmdControl.pausebtnPushed(currentSongPointer);
                 subject.setState(currentSongPointer);
+                cmdControl.pausebtnPushed(subject.getState());
             }
             
         }
@@ -78,8 +81,9 @@ namespace MusicPlayer
         {
             if(currentSongPointer > -1 && currentSongPointer <= queue.Count)
             {
-                cmdControl.playbtnPushed(currentSongPointer);
+                //cmdControl.playbtnPushed(currentSongPointer);
                 subject.setState(currentSongPointer);
+                cmdControl.playbtnPushed(subject.getState());
             }
             
         }
@@ -92,9 +96,10 @@ namespace MusicPlayer
             }
             else
             {
-                currentSongPointer++;
-                cmdControl.playbtnPushed(currentSongPointer);
-                subject.setState(currentSongPointer);
+                //currentSongPointer++;
+                //cmdControl.playbtnPushed(currentSongPointer);
+                subject.setState(++currentSongPointer);
+                cmdControl.playbtnPushed(subject.getState());
             }
         }
 

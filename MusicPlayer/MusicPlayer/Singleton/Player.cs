@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using MusicPlayer.CommandPattern;
+using MusicPlayer.Observer;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,6 +22,9 @@ namespace MusicPlayer
         int slot;
         CommandInvoker cmdControl;
 
+        //testing observer pattern
+        Subject subject;
+
         private Player()
         {
             mplayer = new MediaPlayer();
@@ -28,6 +32,8 @@ namespace MusicPlayer
             currentSongPointer = -1;
             cmdControl = new CommandInvoker();
             slot = 0;               //slot to be used when setting commands
+            subject = new Subject();
+            new Observer1(subject);
         }
 
         private static Player instance = null;
@@ -54,23 +60,26 @@ namespace MusicPlayer
             {
                 currentSongPointer--;
                 cmdControl.playbtnPushed(currentSongPointer);
+                subject.setState(currentSongPointer);
             }
         }
 
         public void pause()
         {
-            if(currentSongPointer > -1)
+            if(currentSongPointer > -1 && currentSongPointer <= queue.Count)
             {
                 cmdControl.pausebtnPushed(currentSongPointer);
+                subject.setState(currentSongPointer);
             }
             
         }
 
         public void play()
         {
-            if(currentSongPointer > -1)
+            if(currentSongPointer > -1 && currentSongPointer <= queue.Count)
             {
                 cmdControl.playbtnPushed(currentSongPointer);
+                subject.setState(currentSongPointer);
             }
             
         }
@@ -85,6 +94,7 @@ namespace MusicPlayer
             {
                 currentSongPointer++;
                 cmdControl.playbtnPushed(currentSongPointer);
+                subject.setState(currentSongPointer);
             }
         }
 

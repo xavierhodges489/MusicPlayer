@@ -80,6 +80,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Observer\Observer.cs" />
+    <Compile Include="Observer\Observer1.cs" />
+    <Compile Include="Observer\Subject.cs" />
     <Compile Include="Singleton\Player.cs" />
     <Compile Include="CommandPattern\Command.cs" />
     <Compile Include="CommandPattern\CommandInvoker.cs" />

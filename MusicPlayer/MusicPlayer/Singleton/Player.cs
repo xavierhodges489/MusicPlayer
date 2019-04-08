@@ -59,17 +59,25 @@ namespace MusicPlayer
 
         public void pause()
         {
-            cmdControl.pausebtnPushed(currentSongPointer);
+            if(currentSongPointer > -1)
+            {
+                cmdControl.pausebtnPushed(currentSongPointer);
+            }
+            
         }
 
         public void play()
         {
-            cmdControl.playbtnPushed(currentSongPointer);
+            if(currentSongPointer > -1)
+            {
+                cmdControl.playbtnPushed(currentSongPointer);
+            }
+            
         }
 
         public void skipForward()
         {
-            if (currentSongPointer >= queue.Count)
+            if (currentSongPointer >= queue.Count || currentSongPointer <= -1)
             {
                 //do nothing
             }

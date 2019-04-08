@@ -13,8 +13,8 @@ namespace MusicPlayer.CommandPattern
 
         public CommandInvoker()
         {
-            playcmds = new Command[10];
-            pausecmds = new Command[10];
+            playcmds = new Command[100];
+            pausecmds = new Command[100];
         }
 
         public void setCommand(int slot, Command play, Command pause)

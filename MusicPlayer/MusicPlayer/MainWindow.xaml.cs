@@ -77,9 +77,9 @@ namespace MusicPlayer
 
         private void ImportButton_Click(object sender, RoutedEventArgs e)
         {
-            
 
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            /*OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.Multiselect = true;
             openFileDialog1.ShowDialog();
 
@@ -94,7 +94,8 @@ namespace MusicPlayer
                 songs.Add(song);
 
                 player.import(song);
-            }
+            } */
+            player.import();
 
             refreshAlbumView();
         }

@@ -71,5 +71,26 @@ namespace MusicPlayer
         {
             player.import();
         }
+
+        private void refresh_Click(object sender, RoutedEventArgs e)
+        {
+            Song currentSong = player.queue[player.currentSongPointer];
+            String title = currentSong.title;
+            String artist = currentSong.artist;
+            String album = currentSong.album;
+            int year = currentSong.year;
+
+            tb_title.Text = title;
+            tb_album.Text = album;
+            tb_artist.Text = artist;
+            tb_year.Text = year.ToString();
+
+            string filename = String.Format("/album_art/{0}.jpg", album);
+
+            image_blurred.Source = new BitmapImage(new Uri(@filename, UriKind.Relative));
+            image_main.Source = new BitmapImage(new Uri(@filename, UriKind.Relative));
+
+            lvSongs.ItemsSource = player.queue;
+        }
     }
 }

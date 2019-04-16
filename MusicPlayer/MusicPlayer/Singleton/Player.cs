@@ -109,22 +109,11 @@ namespace MusicPlayer
 
         public void import(Song song)
         {
-            //OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            //openFileDialog1.Multiselect = true;
-            //openFileDialog1.ShowDialog();
-
-            //String[] s = openFileDialog1.FileNames;
-
-            //for (int i = 0; i < s.Length; i++)
-            //{
-            //    Uri uri = new Uri(s[i], UriKind.Absolute);
-                mplayer.Open(song.filePath);
-            //    File file = File.Create(uri.OriginalString);
-                queue.Add(song);
-                currentSongPointer++;
-                cmdControl.setCommand(slot, new PlayCommand((Song)queue[currentSongPointer]), new PauseCommand((Song)queue[currentSongPointer]));
-                slot++;
-            //}
+            mplayer.Open(song.filePath);
+            queue.Add(song);
+            currentSongPointer++;
+            cmdControl.setCommand(slot, new PlayCommand((Song)queue[currentSongPointer]), new PauseCommand((Song)queue[currentSongPointer]));
+            slot++;
         }
     }
 }

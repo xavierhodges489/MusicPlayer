@@ -88,13 +88,11 @@ namespace MusicPlayer
             for (int i = 0; i < s.Length; i++)
             {
                 Uri uri = new Uri(s[i], UriKind.Absolute);
-                //mplayer.Open(uri);
+
                 File file = File.Create(uri.OriginalString);
                 Song song = new Song(uri, file.Tag.Title, file.Tag.Album, file.Tag.JoinedPerformers, (int)file.Tag.Year);
                 songs.Add(song);
-                //currentSongPointer++;
-                //cmdControl.setCommand(slot, new PlayCommand((Song)queue[currentSongPointer]), new PauseCommand((Song)queue[currentSongPointer]));
-                //slot++;
+
                 player.import(song);
             }
 

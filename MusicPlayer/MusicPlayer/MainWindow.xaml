@@ -19,7 +19,6 @@
         </Grid.RowDefinitions>
         <Rectangle Grid.RowSpan="3" Fill="#BE1E2D" />
 
-        <!--<Frame x:Name="frame" Grid.RowSpan="2" NavigationUIVisibility="Hidden" Margin="1,1,1,0"/>-->
         <Grid Grid.RowSpan="2" Margin="1,1,1,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -107,7 +106,10 @@
                 </StackPanel>
 
             </Grid>
+            <!--End Album View-->
         </Grid>
+        
+        <!--Header-->
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -127,6 +129,9 @@
                 </Button>
             </StackPanel>
         </Grid>
+        <!--End Header-->
+        
+        <!--Player Controls-->
         <Grid Grid.Row="3" Background="#BE1E2D">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button x:Name="skip_back" Click="Skip_back_Click"  Height="20" Margin="5,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
@@ -149,8 +154,7 @@
                 </Button>
 
             </StackPanel>
-
-
         </Grid>
+        <!--End Player Controls-->
     </Grid>
 </Window>

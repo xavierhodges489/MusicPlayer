@@ -19,7 +19,98 @@
         </Grid.RowDefinitions>
         <Rectangle Grid.RowSpan="3" Fill="#BE1E2D" />
 
-        <Frame x:Name="frame" Grid.RowSpan="2" NavigationUIVisibility="Hidden" Margin="1,1,1,0"/>
+        <!--<Frame x:Name="frame" Grid.RowSpan="2" NavigationUIVisibility="Hidden" Margin="1,1,1,0"/>-->
+        <Grid Grid.RowSpan="2" Margin="1,1,1,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <!--List View-->
+            <Grid Background="#FF1F1F1F">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="45"/>
+                </Grid.ColumnDefinitions>
+                
+                <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <Button Content="Albums" FontWeight="Bold" Margin="10,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#BE1E2D"/>
+                    <Button Content="Artists" Margin="10,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White"/>
+                    <Button Content="Songs" Margin="10,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White"/>
+                    <Button Content="Playlists" Margin="10,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White"/>
+                </StackPanel>
+                <!--<Button x:Name="refresh" Click="Refresh_Click" Grid.Row="2" Grid.Column="1" Height="22" Margin="5,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Content="Refresh" FontWeight="Light" FontSize="10"/>-->
+
+
+                <ListView Name="lvSongs" Grid.Column="1" Grid.Row="3" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Focusable="False">
+                    <ListView.Resources>
+                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                            <Setter Property="HorizontalContentAlignment" Value="Left" />
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="BorderBrush" Value="Transparent" />
+                            <Setter Property="Foreground" Value="#FFCDCDCD" />
+                            <Setter Property="FontWeight" Value="Light" />
+                        </Style>
+                    </ListView.Resources>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Title" Width="100" DisplayMemberBinding="{Binding title}"/>
+                            <GridViewColumn Header="Album" Width="100" DisplayMemberBinding="{Binding album}"/>
+                            <GridViewColumn Header="Artist" Width="100" DisplayMemberBinding="{Binding artist}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+            
+            <!--Album View-->
+            <Grid Grid.Column="1" Background="#FF1F1F1F">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="45"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Image Name="image_blurred" Source="/album_art/unknown.jpg" Grid.ColumnSpan="3" Grid.RowSpan="4"  Height="500" Width="500" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Image.Effect>
+                        <BlurEffect Radius="20"/>
+                    </Image.Effect>
+                </Image>
+                <Grid  Grid.ColumnSpan="3" Grid.RowSpan="4">
+                    <Grid.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#BB000000" Offset="1"/>
+                            <GradientStop Color="#44000000"/>
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                </Grid>
+
+                
+                <StackPanel Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Left">
+                    <Image Name="image_main"  Source="/album_art/unknown.jpg" Width="200" Height="200" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+                    <TextBox Name="tb_title" Text="Song Name" TextWrapping="Wrap" Foreground="White" FontWeight="Bold" FontSize="25" Margin="0,15,0,0" Background="{x:Null}" Width="300" BorderBrush="{x:Null}" HorizontalAlignment="Left"/>
+                    <TextBox Name="tb_artist" Text="Artist" Foreground="White" FontWeight="Light"  FontSize="13" Margin="0,1,0,0" Background="Transparent" BorderBrush="Transparent"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Name="tb_album" Text="Album" Foreground="White" FontWeight="Light"  FontSize="13" Background="Transparent" BorderBrush="Transparent"/>
+                        <TextBox  Text="•" Foreground="White" FontWeight="Light"  FontSize="13" Background="Transparent" BorderBrush="Transparent"/>
+                        <TextBox Name="tb_year" Text="Year" Foreground="White" FontWeight="Light"  FontSize="13" Background="Transparent" BorderBrush="Transparent"/>
+                    </StackPanel>
+                </StackPanel>
+
+            </Grid>
+        </Grid>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>

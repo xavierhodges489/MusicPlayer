@@ -33,7 +33,7 @@ namespace MusicPlayer
 
         private void mainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            frame.Navigate(new ListView());
+            //frame.Navigate(new ListView());
             this.DataContext = this;
         }
 

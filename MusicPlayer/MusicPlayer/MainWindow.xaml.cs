@@ -3,6 +3,7 @@ using MusicPlayer.CommandPattern;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TagLib;
 
 namespace MusicPlayer
 {
@@ -25,10 +27,14 @@ namespace MusicPlayer
     {
 
         Player player;
+        private ObservableCollection<Song> songs = new ObservableCollection<Song>();
+        
 
         public MainWindow()
         {
+            InitializeComponent();
             player = Player.Instance;
+            lvSongs.ItemsSource = songs;
         }
 
         private void mainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -50,6 +56,7 @@ namespace MusicPlayer
         private void Skip_back_Click(object sender, RoutedEventArgs e)
         {
             player.skipBack();
+            refreshAlbumView();
         }
 
         private void pause_Click(object sender, RoutedEventArgs e)
@@ -65,14 +72,36 @@ namespace MusicPlayer
         private void skip_forward_Click(object sender, RoutedEventArgs e)
         {
             player.skipForward();
+            refreshAlbumView();
         }
 
         private void ImportButton_Click(object sender, RoutedEventArgs e)
         {
-            player.import();
+            
+
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Multiselect = true;
+            openFileDialog1.ShowDialog();
+
+            String[] s = openFileDialog1.FileNames;
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                Uri uri = new Uri(s[i], UriKind.Absolute);
+                //mplayer.Open(uri);
+                File file = File.Create(uri.OriginalString);
+                Song song = new Song(uri, file.Tag.Title, file.Tag.Album, file.Tag.JoinedPerformers, (int)file.Tag.Year);
+                songs.Add(song);
+                //currentSongPointer++;
+                //cmdControl.setCommand(slot, new PlayCommand((Song)queue[currentSongPointer]), new PauseCommand((Song)queue[currentSongPointer]));
+                //slot++;
+                player.import(song);
+            }
+
+            refreshAlbumView();
         }
 
-        private void refresh_Click(object sender, RoutedEventArgs e)
+        private void refreshAlbumView()
         {
             Song currentSong = player.queue[player.currentSongPointer];
             String title = currentSong.title;
@@ -89,8 +118,6 @@ namespace MusicPlayer
 
             image_blurred.Source = new BitmapImage(new Uri(@filename, UriKind.Relative));
             image_main.Source = new BitmapImage(new Uri(@filename, UriKind.Relative));
-
-            lvSongs.ItemsSource = player.queue;
         }
     }
 }

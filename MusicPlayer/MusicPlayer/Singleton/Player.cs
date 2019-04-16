@@ -4,6 +4,7 @@ using MusicPlayer.Observer;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace MusicPlayer
     public sealed class Player
     {
         public static MediaPlayer mplayer;
-        public List<Song> queue { get; set; }
+        public ObservableCollection<Song> queue { get; set; }
         public int currentSongPointer { get; set; }
         int slot;
         CommandInvoker cmdControl;
@@ -28,7 +29,7 @@ namespace MusicPlayer
         private Player()
         {
             mplayer = new MediaPlayer();
-            queue = new List<Song>();
+            queue = new ObservableCollection<Song>();
             currentSongPointer = -1;
             cmdControl = new CommandInvoker();
             slot = 0;               //slot to be used when setting commands
@@ -106,24 +107,24 @@ namespace MusicPlayer
 
 
 
-        public void import()
+        public void import(Song song)
         {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.Multiselect = true;
-            openFileDialog1.ShowDialog();
+            //OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            //openFileDialog1.Multiselect = true;
+            //openFileDialog1.ShowDialog();
 
-            String[] s = openFileDialog1.FileNames;
+            //String[] s = openFileDialog1.FileNames;
 
-            for (int i = 0; i < s.Length; i++)
-            {
-                Uri uri = new Uri(s[i], UriKind.Absolute);
-                mplayer.Open(uri);
-                File file = File.Create(uri.OriginalString);
-                queue.Add(new Song(uri, file.Tag.Title, file.Tag.Album, file.Tag.JoinedPerformers, (int)file.Tag.Year));
+            //for (int i = 0; i < s.Length; i++)
+            //{
+            //    Uri uri = new Uri(s[i], UriKind.Absolute);
+                mplayer.Open(song.filePath);
+            //    File file = File.Create(uri.OriginalString);
+                queue.Add(song);
                 currentSongPointer++;
                 cmdControl.setCommand(slot, new PlayCommand((Song)queue[currentSongPointer]), new PauseCommand((Song)queue[currentSongPointer]));
                 slot++;
-            }
+            //}
         }
     }
 }

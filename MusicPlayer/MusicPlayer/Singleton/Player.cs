@@ -70,6 +70,7 @@ namespace MusicPlayer
                 subject.setState(--currentSongPointer);
                 //currentSongPointer--;
                 //cmdControl.playbtnPushed(currentSongPointer);
+                mplayer.Open(queue[currentSongPointer].filePath);
                 cmdControl.playbtnPushed(subject.getState());
                 
             }
@@ -97,14 +98,14 @@ namespace MusicPlayer
             
         }
 
-        internal void import(Song song)
+        /*internal void import(Song song)
         {
             throw new NotImplementedException();
-        }
+        }*/
 
         public void skipForward()
         {
-            if (currentSongPointer >= queue.Count || currentSongPointer <= -1)
+            if (currentSongPointer >= queue.Count - 1|| currentSongPointer <= -1)
             {
                 //do nothing
             }
@@ -113,43 +114,45 @@ namespace MusicPlayer
                 //currentSongPointer++;
                 //cmdControl.playbtnPushed(currentSongPointer);
                 subject.setState(++currentSongPointer);
+                mplayer.Open(queue[currentSongPointer].filePath);
                 cmdControl.playbtnPushed(subject.getState());
             }
         }
 
 
 
-        public void import()
+        public void import(Song song, int i)
         {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.Multiselect = true;
-            openFileDialog1.ShowDialog();
+            //OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            //openFileDialog1.Multiselect = true;
+           // openFileDialog1.ShowDialog();
 
-            String[] s = openFileDialog1.FileNames;
+            //String[] s = openFileDialog1.FileNames;
 
-            for (int i = 0; i < s.Length; i++)
-            {
-                Uri uri = new Uri(s[i], UriKind.Absolute);
-                mplayer.Open(uri);
-                File file = File.Create(uri.OriginalString);
+            //for (int i = 0; i < s.Length; i++)
+           // {
+               // Uri uri = new Uri(s[i], UriKind.Absolute);
+                mplayer.Open(song.filePath);
+                //File file = File.Create(uri.OriginalString);
                 // queue.Add(new Song(uri, file.Tag.Title, file.Tag.Album, file.Tag.JoinedPerformers, (int)file.Tag.Year));
-                it.addItem(uri, file.Tag.Title, file.Tag.Album, file.Tag.JoinedPerformers, (int)file.Tag.Year);     //add item to iterator
+                //it.addItem(uri, file.Tag.Title, file.Tag.Album, file.Tag.JoinedPerformers, (int)file.Tag.Year);     //add item to iterator
+                it.addItem(song);
                 /*currentSongPointer++;
                 cmdControl.setCommand(slot, new PlayCommand((Song)queue[currentSongPointer]), new PauseCommand((Song)queue[currentSongPointer]));
                 slot++;*/
-            }
+           // }
             Itermediary iter = new Itermediary(it);
             queue = iter.printInventory();
             Console.WriteLine("queue count = " + queue.Count);
             currentSongPointer++;
-            for (int i = 0; i < queue.Count; i++)
-            {
+            //for (int i = 0; i < queue.Count; i++)
+            //{
                 /*Console.WriteLine(i);
                 queue.Add(queue[i]);
                 Console.WriteLine(" added to queue");*/
                 cmdControl.setCommand(slot, new PlayCommand(queue[i]), new PauseCommand(queue[i]));
                 slot++;
-            }
+            //}
         }
     }
 }

@@ -23,6 +23,11 @@ namespace MusicPlayer.IteratorPattern
             songItems.Add(item);
         }
 
+        public void addItem(Song song)
+        {
+            //Song item = song;
+            songItems.Add(song);
+        }
 
         IEnumerator<Song> IteratorCreator.createIterator()
         {

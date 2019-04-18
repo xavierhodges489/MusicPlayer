@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using MusicPlayer.CommandPattern;
 using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -79,7 +80,7 @@ namespace MusicPlayer
         {
 
 
-            /*OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.Multiselect = true;
             openFileDialog1.ShowDialog();
 
@@ -89,34 +90,41 @@ namespace MusicPlayer
             {
                 Uri uri = new Uri(s[i], UriKind.Absolute);
 
-                File file = File.Create(uri.OriginalString);
+                TagLib.File file = TagLib.File.Create(uri.OriginalString);
                 Song song = new Song(uri, file.Tag.Title, file.Tag.Album, file.Tag.JoinedPerformers, (int)file.Tag.Year);
                 songs.Add(song);
 
-                player.import(song);
-            } */
-            player.import();
+                player.import(song, i);
+            } 
+            //player.import();
 
             refreshAlbumView();
         }
 
         private void refreshAlbumView()
         {
-            Song currentSong = player.queue[player.currentSongPointer];
-            String title = currentSong.title;
-            String artist = currentSong.artist;
-            String album = currentSong.album;
-            int year = currentSong.year;
+            if (player.currentSongPointer > -1)
+            {
+                Song currentSong = player.queue[player.currentSongPointer];
+                String title = currentSong.title;
+                String artist = currentSong.artist;
+                String album = currentSong.album;
+                int year = currentSong.year;
 
-            tb_title.Text = title;
-            tb_album.Text = album;
-            tb_artist.Text = artist;
-            tb_year.Text = year.ToString();
+                tb_title.Text = title;
+                tb_album.Text = album;
+                tb_artist.Text = artist;
+                tb_year.Text = year.ToString();
 
-            string filename = String.Format("/album_art/{0}.jpg", album);
-
-            image_blurred.Source = new BitmapImage(new Uri(@filename, UriKind.Relative));
-            image_main.Source = new BitmapImage(new Uri(@filename, UriKind.Relative));
+                
+                string filename = String.Format("/album_art/{0}.jpg", album);
+                if (!System.IO.File.Exists(filename))
+                {
+                    filename = "/album_art/unknown.jpg";
+                }
+                image_blurred.Source = new BitmapImage(new Uri(@filename, UriKind.Relative));
+                image_main.Source = new BitmapImage(new Uri(@filename, UriKind.Relative));
+            }
         }
     }
 }

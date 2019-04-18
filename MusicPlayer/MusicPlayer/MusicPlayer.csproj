@@ -61,25 +61,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="AlbumView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ListView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="AlbumView.xaml.cs">
-      <DependentUpon>AlbumView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="IteratorPattern\ImportSongIterator.cs" />
+    <Compile Include="IteratorPattern\Iterator.cs" />
+    <Compile Include="IteratorPattern\IteratorCreator.cs" />
+    <Compile Include="IteratorPattern\Itermediary.cs" />
+    <Compile Include="IteratorPattern\SongIterator.cs" />
     <Compile Include="Observer\Observer.cs" />
     <Compile Include="Observer\Observer1.cs" />
     <Compile Include="Observer\Subject.cs" />
@@ -89,9 +83,6 @@
     <Compile Include="CommandPattern\PauseCommand.cs" />
     <Compile Include="CommandPattern\PlayCommand.cs" />
     <Compile Include="CommandPattern\Song.cs" />
-    <Compile Include="ListView.xaml.cs">
-      <DependentUpon>ListView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

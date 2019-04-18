@@ -29,7 +29,7 @@ namespace MusicPlayer.CommandPattern
 
         public void play()
         {
-            Player.mplayer.Open(this.filePath);
+            //Player.mplayer.Open(this.filePath);
             Player.mplayer.Play();
         }
 

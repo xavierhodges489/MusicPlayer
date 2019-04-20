@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace MusicPlayer.Observer
 {
-    abstract class Observer
+    public abstract class Observer
     {
-        protected Subject subject;
+        public Subject subject;
         public abstract void update();
     }
 }

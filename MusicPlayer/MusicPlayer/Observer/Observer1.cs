@@ -8,7 +8,6 @@ namespace MusicPlayer.Observer
 {
     class Observer1 : Observer
     {
-
         public Observer1(Subject subject)
         {
             this.subject = subject;

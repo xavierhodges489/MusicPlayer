@@ -103,6 +103,7 @@
                         <TextBox  Text="•" Foreground="White" FontWeight="Light"  FontSize="13" Background="Transparent" BorderBrush="Transparent"/>
                         <TextBox Name="tb_year" Text="Year" Foreground="White" FontWeight="Light"  FontSize="13" Background="Transparent" BorderBrush="Transparent"/>
                     </StackPanel>
+                    <TextBox Name="currentsong" Text="" Foreground="White" FontWeight="Light"  FontSize="13" Background="Transparent" BorderBrush="Transparent"/>
                 </StackPanel>
 
             </Grid>
@@ -152,7 +153,6 @@
                 <Button x:Name="shuffle" Height="20" Margin="5,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" >
                     <Image Source="/icons/shuffle.png"/>
                 </Button>
-
             </StackPanel>
         </Grid>
         <!--End Player Controls-->

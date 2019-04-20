@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MusicPlayer.Observer
 {
-    class Subject
+    public class Subject
     {
 
         public List<Observer> observers = new List<Observer>();

@@ -28,7 +28,7 @@ namespace MusicPlayer
         SongIterator it;
 
         //testing observer pattern
-        Subject subject;
+        public Subject subject;
 
         private Player()
         {

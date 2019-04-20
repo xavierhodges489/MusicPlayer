@@ -27,9 +27,11 @@ namespace MusicPlayer
     public partial class MainWindow : Window
     {
 
-        Player player;
+        public Player player;
         private ObservableCollection<Song> songs = new ObservableCollection<Song>();
-        
+        int lvSongSelected;
+
+
 
         public MainWindow()
         {
@@ -58,22 +60,38 @@ namespace MusicPlayer
         {
             player.skipBack();
             refreshAlbumView();
+            currentsong.Text = player.subject.getState() + 1 + "/" + player.queue.Count;
         }
 
         private void pause_Click(object sender, RoutedEventArgs e)
         {
             player.pause();
+            currentsong.Text = player.subject.getState() + 1 + "/" + player.queue.Count;
         }
 
         private void play_Click(object sender, RoutedEventArgs e)
         {
-            player.play();
+            
+            if (lvSongs.SelectedIndex != -1)        //if a song is selected from the list view
+            {
+                player.currentSongPointer = lvSongs.SelectedIndex;  //update current song pointer
+                Player.mplayer.Open(songs[lvSongs.SelectedIndex].filePath); //open the song in the player
+                player.play();  //play the selected song
+                currentsong.Text = player.subject.getState() + 1 + "/" + player.queue.Count;     //update song position label in window
+                lvSongs.SelectedIndex = -1;     //reset selected index so that no song is selected
+            } else
+            {
+                player.play();
+                currentsong.Text = player.subject.getState() + 1 + "/" + player.queue.Count;
+            }
+            
         }
 
         private void skip_forward_Click(object sender, RoutedEventArgs e)
         {
             player.skipForward();
             refreshAlbumView();
+            currentsong.Text = player.subject.getState() + 1 + "/" + player.queue.Count;
         }
 
         private void ImportButton_Click(object sender, RoutedEventArgs e)
@@ -124,6 +142,7 @@ namespace MusicPlayer
                 }
                 image_blurred.Source = new BitmapImage(new Uri(@filename, UriKind.Relative));
                 image_main.Source = new BitmapImage(new Uri(@filename, UriKind.Relative));
+                
             }
         }
     }

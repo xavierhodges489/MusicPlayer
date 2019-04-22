@@ -118,8 +118,22 @@ namespace MusicPlayer
                 cmdControl.playbtnPushed(subject.getState());
             }
         }
-
-
+        public ObservableCollection<Song> shuffle(ObservableCollection<Song> queue)
+        {
+            Random ran = new Random();
+            ObservableCollection<Song> tempQueue = new ObservableCollection<Song>();
+            Song currSong = queue[currentSongPointer];
+            while (queue.Count > 0)
+            {
+                //queue.Remove(queue[currentSongPointer]);
+                int ranIdx = ran.Next(0, queue.Count);
+                tempQueue.Add(queue[ranIdx]);
+                queue.RemoveAt(ranIdx);
+            }
+            tempQueue.Remove(currSong);
+            tempQueue.Insert(0, currSong);
+            return tempQueue;
+        }
 
         public void import(Song song, int i)
         {

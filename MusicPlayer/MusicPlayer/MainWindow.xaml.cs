@@ -79,6 +79,7 @@ namespace MusicPlayer
                 player.play();  //play the selected song
                 currentsong.Text = player.subject.getState() + 1 + "/" + player.queue.Count;     //update song position label in window
                 lvSongs.SelectedIndex = -1;     //reset selected index so that no song is selected
+                refreshAlbumView(); //update album view
             } else
             {
                 player.play();

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace MusicPlayer.IteratorPattern
 {
+    //iterator interface -- each iterator will have a hasNext() and next() function
     interface Iterator
     {
         bool hasNext();

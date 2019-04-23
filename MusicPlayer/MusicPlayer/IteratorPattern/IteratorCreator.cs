@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace MusicPlayer.IteratorPattern
 {
+    //IteratorCreator interface -- each will have a createIterator() function
     interface IteratorCreator
     {
         IEnumerator<Song> createIterator();

@@ -8,6 +8,7 @@ namespace MusicPlayer.CommandPattern
 {
     public class Song
     {
+        //variables each Song will have
         public Uri filePath { get; set; }
 
         public string title { get; set; }
@@ -17,7 +18,8 @@ namespace MusicPlayer.CommandPattern
         public string  artist { get; set; }
 
         public int year { get; set; }
-
+        
+        //song constructor
         public Song(Uri file, string title, string album, string artist, int year)
         {
             this.filePath = file;
@@ -26,13 +28,12 @@ namespace MusicPlayer.CommandPattern
             this.artist = artist;
             this.year = year;
         }
-
+        //plays the song with windows media player Play() method
         public void play()
         {
-            //Player.mplayer.Open(this.filePath);
             Player.mplayer.Play();
         }
-
+        //pauses the song with windows media player Pause() method
         public void pause()
         {
             Player.mplayer.Pause();

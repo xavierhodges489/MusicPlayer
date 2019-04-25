@@ -150,9 +150,9 @@
                 <Button x:Name="loop" Height="20" Margin="25,0,5,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" >
                     <Image Source="/icons/loop.png"/>
                 </Button>
-                <Button x:Name="shuffle" Height="20" Margin="5,0" Click="shuffle_Click" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" >
+                <ToggleButton x:Name="shuffleToggle" Height="20" Margin="5,0" Checked="shuffle_Checked" Unchecked="shuffle_Unchecked" Background="{x:Null}">
                     <Image Source="/icons/shuffle.png"/>
-                </Button>
+                </ToggleButton>
             </StackPanel>
         </Grid>
         <!--End Player Controls-->

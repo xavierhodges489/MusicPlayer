@@ -95,9 +95,14 @@ namespace MusicPlayer
             currentsong.Text = player.subject.getState() + 1 + "/" + player.queue.Count;
         }
 
-        private void shuffle_Click(object sender, RoutedEventArgs e)
+        private void shuffle_Checked(object sender, RoutedEventArgs e)
         {
             player.queue = player.shuffle(player.queue);
+        }
+
+        private void shuffle_Unchecked(object sender, RoutedEventArgs e)
+        {
+            player.queue = player.undoShuffle(player.queue);
         }
 
         private void ImportButton_Click(object sender, RoutedEventArgs e)

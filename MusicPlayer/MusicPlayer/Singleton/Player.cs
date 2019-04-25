@@ -20,12 +20,15 @@ namespace MusicPlayer
     {
         public static MediaPlayer mplayer;
         public ObservableCollection<Song> queue { get; set; }
+        public ObservableCollection<Song> savedQueue { get; set; }
         //public List<Song> queue { get; set; }
         public int currentSongPointer { get; set; }
         int slot;
         CommandInvoker cmdControl;
 
         SongIterator it;
+
+        Boolean loopOn;
 
         //testing observer pattern
         public Subject subject;
@@ -118,21 +121,53 @@ namespace MusicPlayer
                 cmdControl.playbtnPushed(subject.getState());
             }
         }
+
+        //method to shuffle queue
         public ObservableCollection<Song> shuffle(ObservableCollection<Song> queue)
         {
-            Random ran = new Random();
+            /*copy the queue variable to the savedQueue variable*/
+            savedQueue = queue;
+           
             ObservableCollection<Song> tempQueue = new ObservableCollection<Song>();
-            Song currSong = queue[currentSongPointer];
-            while (queue.Count > 0)
+            if (currentSongPointer > -1)
             {
-                //queue.Remove(queue[currentSongPointer]);
-                int ranIdx = ran.Next(0, queue.Count);
-                tempQueue.Add(queue[ranIdx]);
-                queue.RemoveAt(ranIdx);
+
+                Random ran = new Random();
+                
+                  /*assign the currently pointed song as the currSong variable*/
+                Song currSong = queue[currentSongPointer];
+
+                //loop to iterate through queue
+                while (queue.Count > 0)
+                {
+                    /*create a random index number between 0 and the queue variable count,
+                     add the song tied to the random index to the temporary queue variable
+                     and remove song tried to the random index from the queue variable*/
+                    int ranIdx = ran.Next(0, queue.Count);
+                    tempQueue.Add(queue[ranIdx]);
+                    queue.RemoveAt(ranIdx);
+                }
+                /*remove the song tied with the current song pointer from the queue variable,
+                  insert the song tied to the current song pointer to the zeroth index of the temporary queue variable
+                  and return temporary queue varaiable to the global queue variable*/
+                tempQueue.Remove(currSong);
+                tempQueue.Insert(0, currSong);
+                
             }
-            tempQueue.Remove(currSong);
-            tempQueue.Insert(0, currSong);
             return tempQueue;
+        }
+
+        public ObservableCollection<Song> undoShuffle(ObservableCollection<Song> queue)
+        {
+            queue = savedQueue;
+            if (currentSongPointer > -1)
+            {                
+                for (int i = currentSongPointer; i < queue.Count; i++)
+                {
+                    queue.Add(queue[i]);
+                }
+            }
+            return queue;
         }
 
         public void import(Song song, int i)

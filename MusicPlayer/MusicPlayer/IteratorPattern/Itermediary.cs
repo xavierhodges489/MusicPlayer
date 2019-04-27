@@ -32,7 +32,6 @@ namespace MusicPlayer.IteratorPattern
             while (moving == true)
             {
                 Song item = iterator.Current;
-                Console.WriteLine(item.filePath + " " + item.title + " " + item.album + " " + item.artist + " " + item.year);
                 example.Add(item);
                 moving = iterator.MoveNext();
             }

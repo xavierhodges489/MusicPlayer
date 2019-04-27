@@ -29,15 +29,13 @@ namespace MusicPlayer
 
         public Player player;
         private ObservableCollection<Song> songs = new ObservableCollection<Song>();
-        int lvSongSelected;
-
-
 
         public MainWindow()
         {
             InitializeComponent();
             player = Player.Instance;
             lvSongs.ItemsSource = songs;
+            
         }
 
         private void mainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -60,13 +58,11 @@ namespace MusicPlayer
         {
             player.skipBack();
             refreshAlbumView();
-            currentsong.Text = player.subject.getState() + 1 + "/" + player.queue.Count;
         }
 
         private void pause_Click(object sender, RoutedEventArgs e)
         {
             player.pause();
-            currentsong.Text = player.subject.getState() + 1 + "/" + player.queue.Count;
         }
 
         private void play_Click(object sender, RoutedEventArgs e)
@@ -77,13 +73,11 @@ namespace MusicPlayer
                 player.currentSongPointer = lvSongs.SelectedIndex;  //update current song pointer
                 Player.mplayer.Open(songs[lvSongs.SelectedIndex].filePath); //open the song in the player
                 player.play();  //play the selected song
-                currentsong.Text = player.subject.getState() + 1 + "/" + player.queue.Count;     //update song position label in window
                 lvSongs.SelectedIndex = -1;     //reset selected index so that no song is selected
                 refreshAlbumView(); //update album view
             } else
             {
                 player.play();
-                currentsong.Text = player.subject.getState() + 1 + "/" + player.queue.Count;
             }
             
         }
@@ -92,17 +86,11 @@ namespace MusicPlayer
         {
             player.skipForward();
             refreshAlbumView();
-            currentsong.Text = player.subject.getState() + 1 + "/" + player.queue.Count;
         }
 
-        private void shuffle_Checked(object sender, RoutedEventArgs e)
+        private void shuffle_Click(object sender, RoutedEventArgs e)
         {
             player.queue = player.shuffle(player.queue);
-        }
-
-        private void shuffle_Unchecked(object sender, RoutedEventArgs e)
-        {
-            player.queue = player.undoShuffle(player.queue);
         }
 
         private void ImportButton_Click(object sender, RoutedEventArgs e)
@@ -130,7 +118,29 @@ namespace MusicPlayer
             refreshAlbumView();
         }
 
-        private void refreshAlbumView()
+        private void loop_clicked(object sender, RoutedEventArgs e)
+        {
+            if(loop.IsChecked == true)
+            {
+                player.loop();
+                
+            }
+            refreshAlbumView();
+
+        }
+
+        private void loop_unclicked(object sender, RoutedEventArgs e)
+        {
+            if(loop.IsChecked == false)
+            {
+                Player.mplayer.MediaEnded += (s, eventArgs) => playNextSong();
+
+            }
+            refreshAlbumView();
+
+        }
+
+        public void refreshAlbumView()
         {
             if (player.currentSongPointer > -1)
             {
@@ -153,8 +163,14 @@ namespace MusicPlayer
                 }
                 image_blurred.Source = new BitmapImage(new Uri(@filename, UriKind.Relative));
                 image_main.Source = new BitmapImage(new Uri(@filename, UriKind.Relative));
-                
+                currentsong.Text = player.subject.getState() + 1 + "/" + player.queue.Count;
             }
+        }
+
+        private void playNextSong()
+        {
+            player.skipForward();
+            refreshAlbumView();
         }
     }
 }

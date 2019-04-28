@@ -190,13 +190,21 @@ namespace MusicPlayer
                 tb_artist.Text = artist;
                 tb_year.Text = year.ToString();
 
-                string filename = String.Format("/album_art/{0}.jpg", album);
+                string filename = currentDir + String.Format("/album_art/{0}.jpg", album);
                 //if (!System.IO.File.Exists(filename))
                 //{
                 //    filename = "/album_art/unknown.jpg";
                 //}
-                image_blurred.Source = new BitmapImage(new Uri(currentDir + filename, UriKind.Absolute));
-                image_main.Source = new BitmapImage(new Uri(currentDir + filename, UriKind.Absolute));
+                if (System.IO.File.Exists(filename))
+                {
+                    image_blurred.Source = new BitmapImage(new Uri(filename, UriKind.Absolute));
+                    image_main.Source = new BitmapImage(new Uri(filename, UriKind.Absolute));
+                }
+                else
+                {
+                    image_blurred.Source = new BitmapImage(new Uri(currentDir + "/album_art/unknown.jpg", UriKind.Absolute));
+                    image_main.Source = new BitmapImage(new Uri(currentDir + "/album_art/unknown.jpg", UriKind.Absolute));
+                }
                 currentsong.Text = player.subject.getState() + 1 + "/" + player.queue.Count;
             }
         }

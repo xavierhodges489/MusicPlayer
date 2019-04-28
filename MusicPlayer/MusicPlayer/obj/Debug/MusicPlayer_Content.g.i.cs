@@ -8,6 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("album_art/abbey%20road%20-%202009%20remaster.jpg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("album_art/narrowstairs.jpg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("album_art/the%20collection%20(box%20set)%20bridge%20over%20troubled%20water.jpg")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("album_art/unknown.jpg")]
 
 

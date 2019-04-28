@@ -35,6 +35,8 @@ namespace MusicPlayer
             InitializeComponent();
             player = Player.Instance;
             lvSongs.ItemsSource = songs;
+            lvSongs.ItemsSource = songs;    //list view
+            Player.mplayer.MediaEnded += (s, eventArgs) => playNextSong();  //play next song anytime a song ends
 
             string currentDir = System.IO.Path.GetDirectoryName(Environment.CurrentDirectory);
             Import(System.IO.File.ReadAllLines(currentDir + "/files.txt"));
@@ -197,6 +199,16 @@ namespace MusicPlayer
         {
             player.skipForward();
             refreshAlbumView();
+        }
+        
+        private void shuffleToggle_Checked(object sender, RoutedEventArgs e)
+        {
+            player.queue = player.shuffle();    //shuffle function
+        }
+
+        private void shuffleToggle_Unchecked(object sender, RoutedEventArgs e)
+        {
+            player.undoShuffle();       //remove shuffling and restore queue to original state
         }
 
         private void Reset_Click(object sender, RoutedEventArgs e)

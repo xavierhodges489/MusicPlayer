@@ -137,8 +137,13 @@ namespace MusicPlayer
                 cmdControl.playbtnPushed(subject.getState());
             }
         }
-        public ObservableCollection<Song> shuffle(ObservableCollection<Song> queue)
+        public ObservableCollection<Song> shuffle()
         {
+            savedQueue = new ObservableCollection<Song>();
+            for (int i = 0; i < queue.Count; i++)
+            {
+                savedQueue.Add(queue[i]);		//storing contents of queue into savedQueue
+            }
             Random ran = new Random();
             ObservableCollection<Song> tempQueue = new ObservableCollection<Song>();
             Song currSong = queue[currentSongPointer];
@@ -155,7 +160,20 @@ namespace MusicPlayer
             {
                 Console.WriteLine(tempQueue[i].title);
             }
+            currentSongPointer = 0;
             return tempQueue;
+        }
+
+        public void undoShuffle()
+        {
+            //queue = savedQueue;	//issue
+            queue = new ObservableCollection<Song>();
+            for (int i = 0; i < savedQueue.Count; i++)
+            {
+                queue.Add(savedQueue[i]);		//storing contents of savedQueue into queue
+                Console.WriteLine(queue[i].title);
+            }
+            currentSongPointer = 0;
         }
 
         public void loop()

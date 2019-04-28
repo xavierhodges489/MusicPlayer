@@ -20,6 +20,7 @@ namespace MusicPlayer
     {
         public static MediaPlayer mplayer;
         public ObservableCollection<Song> queue { get; set; }
+        public ObservableCollection<Song> savedQueue { get; set; }
         //public List<Song> queue { get; set; }
         public int currentSongPointer { get; set; }
         int slot;

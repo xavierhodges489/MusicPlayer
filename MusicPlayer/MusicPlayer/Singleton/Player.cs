@@ -118,6 +118,11 @@ namespace MusicPlayer
             
         }
 
+        public void stop()
+        {
+            cmdControl.stopbtnPushed(subject.getState());
+        }
+
         /*internal void import(Song song)
         {
             throw new NotImplementedException();
@@ -214,7 +219,7 @@ namespace MusicPlayer
                 /*Console.WriteLine(i);
                 queue.Add(queue[i]);
                 Console.WriteLine(" added to queue");*/
-                cmdControl.setCommand(slot, new PlayCommand(queue[i]), new PauseCommand(queue[i]));
+                cmdControl.setCommand(slot, new PlayCommand(queue[i]), new PauseCommand(queue[i]), new StopCommand(queue[i]));
                 slot++;
             //}
         }

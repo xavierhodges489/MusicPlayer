@@ -26,7 +26,7 @@ namespace MusicPlayer
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        string currentDir;
         public Player player;
         private ObservableCollection<Song> songs = new ObservableCollection<Song>();
 
@@ -38,8 +38,14 @@ namespace MusicPlayer
             lvSongs.ItemsSource = songs;    //list view
             Player.mplayer.MediaEnded += (s, eventArgs) => playNextSong();  //play next song anytime a song ends
 
-            string currentDir = System.IO.Path.GetDirectoryName(Environment.CurrentDirectory);
+            currentDir = System.IO.Path.GetDirectoryName(Environment.CurrentDirectory);
+
             Import(System.IO.File.ReadAllLines(currentDir + "/files.txt"));
+
+            image_blurred.Source = new BitmapImage(new Uri(currentDir+"/album_art/unknown.jpg", UriKind.Absolute));
+            image_main.Source = new BitmapImage(new Uri(currentDir + "/album_art/unknown.jpg", UriKind.Absolute));
+
+            refreshAlbumView();
         }
 
         private void mainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -92,10 +98,6 @@ namespace MusicPlayer
             refreshAlbumView();
         }
 
-        private void shuffle_Click(object sender, RoutedEventArgs e)
-        {
-            player.queue = player.shuffle(player.queue);
-        }
 
         private void ImportButton_Click(object sender, RoutedEventArgs e)
         {
@@ -116,13 +118,17 @@ namespace MusicPlayer
             {
                 if (System.IO.File.ReadAllLines(System.IO.Path.GetDirectoryName(Environment.CurrentDirectory) + "/files.txt").Contains(s[i]))
                 {
-                    Uri uri = new Uri(s[i], UriKind.Absolute);
+                    if (System.IO.File.Exists(s[i]))
+                    {
+                        Uri uri = new Uri(s[i], UriKind.Absolute);
 
-                    TagLib.File file = TagLib.File.Create(uri.OriginalString);
-                    Song song = new Song(uri, file.Tag.Title, file.Tag.Album, file.Tag.JoinedPerformers, (int)file.Tag.Year);
-                    songs.Add(song);
+                        TagLib.File file = TagLib.File.Create(uri.OriginalString);
+                        Song song = new Song(uri, file.Tag.Title, file.Tag.Album, file.Tag.JoinedPerformers, (int)file.Tag.Year);
+                        songs.Add(song);
 
-                    player.import(song, i);
+                        player.import(song, i);
+                    }
+                    
                 }
                 else
                 {
@@ -189,8 +195,8 @@ namespace MusicPlayer
                 //{
                 //    filename = "/album_art/unknown.jpg";
                 //}
-                image_blurred.Source = new BitmapImage(new Uri(@filename, UriKind.Relative));
-                image_main.Source = new BitmapImage(new Uri(@filename, UriKind.Relative));
+                image_blurred.Source = new BitmapImage(new Uri(currentDir + filename, UriKind.Absolute));
+                image_main.Source = new BitmapImage(new Uri(currentDir + filename, UriKind.Absolute));
                 currentsong.Text = player.subject.getState() + 1 + "/" + player.queue.Count;
             }
         }
@@ -217,6 +223,8 @@ namespace MusicPlayer
             songs.Clear();
             player.reset();
             refreshAlbumView();
+            image_blurred.Source = new BitmapImage(new Uri(currentDir + "/album_art/unknown.jpg", UriKind.Absolute));
+            image_main.Source = new BitmapImage(new Uri(currentDir + "/album_art/unknown.jpg", UriKind.Absolute));
         }
     }
 }

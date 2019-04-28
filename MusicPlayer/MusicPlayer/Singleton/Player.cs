@@ -161,7 +161,7 @@ namespace MusicPlayer
             {
                 Console.WriteLine(tempQueue[i].title);
             }
-            currentSongPointer = 0;
+            //currentSongPointer = 0;
             return tempQueue;
         }
 
@@ -174,7 +174,7 @@ namespace MusicPlayer
                 queue.Add(savedQueue[i]);		//storing contents of savedQueue into queue
                 Console.WriteLine(queue[i].title);
             }
-            currentSongPointer = 0;
+            //currentSongPointer = 0;
         }
 
         public void loop()

@@ -38,5 +38,10 @@ namespace MusicPlayer.CommandPattern
         {
             Player.mplayer.Pause();
         }
+
+        public void stop()
+        {
+            Player.mplayer.Stop();
+        }
     }
 }

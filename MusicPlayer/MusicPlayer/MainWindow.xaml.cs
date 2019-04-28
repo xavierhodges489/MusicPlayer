@@ -249,6 +249,11 @@ namespace MusicPlayer
             refreshAlbumView();
             image_blurred.Source = new BitmapImage(new Uri(currentDir + "/album_art/unknown.jpg", UriKind.Absolute));
             image_main.Source = new BitmapImage(new Uri(currentDir + "/album_art/unknown.jpg", UriKind.Absolute));
+            tb_title.Text = "Title";
+            tb_artist.Text = "Artist";
+            tb_album.Text = "Album";
+            tb_year.Text = "xxxx";
+
         }
     }
 }

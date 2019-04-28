@@ -29,6 +29,7 @@ namespace MusicPlayer
 
         public Player player;
         private ObservableCollection<Song> songs = new ObservableCollection<Song>();
+        private bool paused = false;
 
         public MainWindow()
         {
@@ -66,8 +67,17 @@ namespace MusicPlayer
 
         private void pause_Click(object sender, RoutedEventArgs e)
         {
-            player.pause();
+        if (paused == false)
+        {
+        paused = true;
+        player.pause();
         }
+        else
+        {
+            paused = false;
+            player.play();
+        }
+    }
 
         private void play_Click(object sender, RoutedEventArgs e)
         {
@@ -79,12 +89,16 @@ namespace MusicPlayer
                 player.play();  //play the selected song
                 lvSongs.SelectedIndex = -1;     //reset selected index so that no song is selected
                 refreshAlbumView(); //update album view
-            } else
+            }
+            else
             {
+            if (paused == true)
+            {
+                paused = false;
                 player.play();
             }
-            
-        }
+        }            
+    }
 
         private void skip_forward_Click(object sender, RoutedEventArgs e)
         {

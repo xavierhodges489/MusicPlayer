@@ -120,6 +120,7 @@ namespace MusicPlayer
 
 
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Filter = "mp3|*.mp3|All Files|*.*";
             openFileDialog1.Multiselect = true;
             openFileDialog1.ShowDialog();
 

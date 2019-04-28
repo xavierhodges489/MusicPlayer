@@ -35,7 +35,9 @@ namespace MusicPlayer
             InitializeComponent();
             player = Player.Instance;
             lvSongs.ItemsSource = songs;
-            
+
+            string currentDir = System.IO.Path.GetDirectoryName(Environment.CurrentDirectory);
+            Import(System.IO.File.ReadAllLines(currentDir + "/files.txt"));
         }
 
         private void mainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -103,16 +105,41 @@ namespace MusicPlayer
 
             String[] s = openFileDialog1.FileNames;
 
+            Import(s);
+        }
+
+        private void Import(String[] s)
+        {
             for (int i = 0; i < s.Length; i++)
             {
-                Uri uri = new Uri(s[i], UriKind.Absolute);
+                if (System.IO.File.ReadAllLines(System.IO.Path.GetDirectoryName(Environment.CurrentDirectory) + "/files.txt").Contains(s[i]))
+                {
+                    Uri uri = new Uri(s[i], UriKind.Absolute);
 
-                TagLib.File file = TagLib.File.Create(uri.OriginalString);
-                Song song = new Song(uri, file.Tag.Title, file.Tag.Album, file.Tag.JoinedPerformers, (int)file.Tag.Year);
-                songs.Add(song);
+                    TagLib.File file = TagLib.File.Create(uri.OriginalString);
+                    Song song = new Song(uri, file.Tag.Title, file.Tag.Album, file.Tag.JoinedPerformers, (int)file.Tag.Year);
+                    songs.Add(song);
 
-                player.import(song, i);
-            } 
+                    player.import(song, i);
+                }
+                else
+                {
+                    using (System.IO.StreamWriter outfile =
+                                        new System.IO.StreamWriter(System.IO.Path.GetDirectoryName(Environment.CurrentDirectory) + "/files.txt", true))
+                    {
+                        outfile.WriteLine(s[i]);
+                    }
+
+                    Uri uri = new Uri(s[i], UriKind.Absolute);
+
+                    TagLib.File file = TagLib.File.Create(uri.OriginalString);
+                    Song song = new Song(uri, file.Tag.Title, file.Tag.Album, file.Tag.JoinedPerformers, (int)file.Tag.Year);
+                    songs.Add(song);
+
+                    player.import(song, i);
+                }
+                
+            }
             //player.import();
 
             refreshAlbumView();
@@ -155,12 +182,11 @@ namespace MusicPlayer
                 tb_artist.Text = artist;
                 tb_year.Text = year.ToString();
 
-                
                 string filename = String.Format("/album_art/{0}.jpg", album);
-                if (!System.IO.File.Exists(filename))
-                {
-                    filename = "/album_art/unknown.jpg";
-                }
+                //if (!System.IO.File.Exists(filename))
+                //{
+                //    filename = "/album_art/unknown.jpg";
+                //}
                 image_blurred.Source = new BitmapImage(new Uri(@filename, UriKind.Relative));
                 image_main.Source = new BitmapImage(new Uri(@filename, UriKind.Relative));
                 currentsong.Text = player.subject.getState() + 1 + "/" + player.queue.Count;
@@ -170,6 +196,14 @@ namespace MusicPlayer
         private void playNextSong()
         {
             player.skipForward();
+            refreshAlbumView();
+        }
+
+        private void Reset_Click(object sender, RoutedEventArgs e)
+        {
+            System.IO.File.WriteAllText(System.IO.Path.GetDirectoryName(Environment.CurrentDirectory) + "/files.txt", string.Empty);
+            songs.Clear();
+            player.reset();
             refreshAlbumView();
         }
     }

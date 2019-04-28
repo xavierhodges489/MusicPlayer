@@ -59,6 +59,21 @@ namespace MusicPlayer
             }
         }
 
+        public void reset()
+        {
+            mplayer = new MediaPlayer();
+            queue = new ObservableCollection<Song>();
+            //queue = new List<Song>();
+            currentSongPointer = -1;
+            cmdControl = new CommandInvoker();
+            slot = 0;               //slot to be used when setting commands
+            subject = new Subject();
+            subject.setState(currentSongPointer);
+            new Observer1(subject);
+
+            it = new SongIterator();
+        }
+
         public void skipBack()
         {
             if (currentSongPointer <= 0)

@@ -40,10 +40,8 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                    <Button Content="Albums" FontWeight="Bold" Margin="10,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#BE1E2D"/>
-                    <Button Content="Artists" Margin="10,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White"/>
-                    <Button Content="Songs" Margin="10,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White"/>
-                    <Button Content="Playlists" Margin="10,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White"/>
+                    <Button Content="Songs" FontWeight="Bold" Margin="10,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#BE1E2D"/>
+                    <Button Content="reset" Margin="20,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="Reset_Click"/>
                 </StackPanel>
 
                 <ListView Name="lvSongs" Grid.Column="1" Grid.Row="3" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Focusable="False">

@@ -69,6 +69,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CommandPattern\StopCommand.cs" />
     <Compile Include="IteratorPattern\ImportSongIterator.cs" />
     <Compile Include="IteratorPattern\Iterator.cs" />
     <Compile Include="IteratorPattern\IteratorCreator.cs" />
@@ -130,6 +131,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\Stop.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

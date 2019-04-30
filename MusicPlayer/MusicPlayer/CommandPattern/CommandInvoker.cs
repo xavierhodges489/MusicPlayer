@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MusicPlayer.CommandPattern
+﻿namespace MusicPlayer.CommandPattern
 {
     //class that holds all commands in the command pattern
     class CommandInvoker

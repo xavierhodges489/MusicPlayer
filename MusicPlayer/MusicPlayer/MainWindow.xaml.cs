@@ -98,6 +98,7 @@ namespace MusicPlayer
             } else
             {
                 player.play();
+                refreshAlbumView();
             }
             
         }
@@ -175,10 +176,8 @@ namespace MusicPlayer
             if(loop.IsChecked == true)
             {
                 player.loop();
-                
+                refreshAlbumView();
             }
-            refreshAlbumView();
-
         }
 
         private void loop_unclicked(object sender, RoutedEventArgs e)
@@ -186,10 +185,8 @@ namespace MusicPlayer
             if(loop.IsChecked == false)
             {
                 Player.mplayer.MediaEnded += (s, eventArgs) => playNextSong();
-
+                refreshAlbumView();
             }
-            refreshAlbumView();
-
         }
 
         public void refreshAlbumView()
